@@ -2,6 +2,12 @@ node {
 
 	def commit_id
 
+	 def to = emailextrecipients([
+		[$class: 'CulpritsRecipientProvider'],
+		[$class: 'DevelopersRecipientProvider'],
+		[$class: 'RequesterRecipientProvider']
+	]);
+
 	try {
 		stage('Preparation') {
 			git branch: 'main', url: 'https://github.com/pdisec2122/project-exercise1.git'
@@ -17,6 +23,7 @@ node {
 
 		stage('makeItFail')  {
 			sh 'exit 1'
+			throw new Exception("error")
 		}
 
 	} catch (e) {
