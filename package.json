@@ -1,0 +1,15 @@
+{
+  "name": "pd-isec-2122-ex1",
+  "version": "1.0.0",
+  "description": "Exercise 1 of the final assignment for PD",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
