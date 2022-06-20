@@ -21,11 +21,12 @@ node {
 			}
 		}
 
+		currentBuild.result = "SUCCESS";
+
 	} catch (e) {
 		currentBuild.result = "FAILURE";
-	
 		throw e;
-		
+
 	} finally {
 		def subject = "${env.JOB_NAME} - Build #${env.BUILD_NUMBER} ${currentBuild.result}"
 		def content = '${JELLY_SCRIPT,template="html"}'
