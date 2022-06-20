@@ -31,11 +31,15 @@ node {
 		def subject = "${env.JOB_NAME} - Build #${env.BUILD_NUMBER} ${currentBuild.result}"
 		def content = '${JELLY_SCRIPT,template="html"}'
 		
+		// send email with build result
 		if (to != null && !to.isEmpty()) {
 			emailext(body: content, mimeType: 'text/html',
 				replyTo: '$DEFAULT_REPLYTO', subject: subject,
 				to: to, attachLog: true )
 		}
+
+		// send slack message with build result
+		slackSend(message: subject)
 	}
 
 }
