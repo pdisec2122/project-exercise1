@@ -21,14 +21,12 @@ node {
 			}
 		}
 
-		stage('makeItFail')  {
-			sh 'exit 1'
-			throw new Exception("error")
-		}
-
 	} catch (e) {
 		currentBuild.result = "FAILURE";
 	
+		throw e;
+		
+	} finally {
 		def subject = "${env.JOB_NAME} - Build #${env.BUILD_NUMBER} ${currentBuild.result}"
 		def content = '${JELLY_SCRIPT,template="html"}'
 		
@@ -37,8 +35,6 @@ node {
 				replyTo: '$DEFAULT_REPLYTO', subject: subject,
 				to: to, attachLog: true )
 		}
-		
-		throw e;
 	}
 
 }
