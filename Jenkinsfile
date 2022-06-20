@@ -17,7 +17,9 @@ node {
 
 		stage('docker build/push') {
 			docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-				def app = docker.build("pdisec2122/project-exercise1:${commit_id}", '.').push()
+				def app = docker.build("pdisec2122/project-exercise1")
+				app.push("${commit_id}")
+				app.push("latest")
 			}
 		}
 
