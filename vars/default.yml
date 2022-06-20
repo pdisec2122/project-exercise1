@@ -1,0 +1,4 @@
+---
+default_user: lfilipevm
+default_container_name: test-exercise1
+default_container_image: pdisec2122/project-exercise1:latest

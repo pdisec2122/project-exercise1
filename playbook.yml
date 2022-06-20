@@ -1,0 +1,23 @@
+---
+- hosts: all
+  remote_user: "{{ default_user }}"
+  become: true
+  vars_files:
+    - vars/default.yml
+
+  tasks:
+    - name: Install required system packages
+      apt: name={{ item }} state=latest update_cache=yes
+      loop: [ 'curl']
+
+    - name: Pull default Docker image
+      docker_image:
+        name: "{{ default_container_image }}"
+        source: pull
+
+    - name: Create default containers
+      docker_container:
+        name: "{{ default_container_name }}"
+        image: "{{ default_container_image }}"
+        ports:
+          - "3000:3000"
